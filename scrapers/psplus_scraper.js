@@ -20,7 +20,7 @@ async function scrapeData() {
     post.imgURL = $(articles).find('a').find('div').find('img').attr('data-src');
     post.postURL = $(articles).children().attr('href');
     post.postText = $(articles).find('a').find('div').find('img').attr('alt');
-    console.dir(post);
+    // console.dir(post);
 
 //To populate initial database
     // const posts = [];
