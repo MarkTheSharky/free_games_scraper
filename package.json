@@ -2,9 +2,13 @@
   "name": "free_games_web_scraper",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "psplus_scraper.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon app.js",
+    "psplus": "nodemon scrapers/psplus_scraper.js",
+    "psnow": "nodemon scrapers/psnow_scraper.js",
+    "xbox": "nodemon scrapers/xbox_games_pass_scraper.js",
+    "amazon": "nodemon scrapers/amazon_prime_gaming_scraper.js"
   },
   "author": "",
   "license": "ISC",
@@ -12,6 +16,8 @@
     "axios": "^0.25.0",
     "cheerio": "^1.0.0-rc.10",
     "cors": "^2.8.5",
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "fs": "^0.0.1-security",
+    "pretty": "^2.0.0"
   }
 }
