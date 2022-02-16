@@ -15,18 +15,42 @@ async function scrapeData(lastPost) {
     // Select all the article tags
     const articles = $("article");
 
-    const post = { service: "psplus", postID: "", imgURL: "", postURL: "", postText: "", };
+    const post = { service: "psplus", postID: "", imgURL: "", postURL: "", title: "", description: "" };
     post.postID = $(articles).attr('id')
     post.imgURL = $(articles).find('a').find('div').find('img').attr('data-src');
     post.postURL = $(articles).children().attr('href');
-    post.postText = $(articles).find('a').find('div').find('img').attr('alt');
+    const titleString = $(articles).find('a').find('div').find('img').attr('alt');
+    const colonIndex = titleString.indexOf(':')
+    post.title = titleString.slice(0, colonIndex).replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
+    post.description = titleString.slice(colonIndex + 2)
     
-    
+    const obj = {
+      "username": "Playstation Plus",
+      "embeds": [
+        {
+          "title": post.title,
+          "url": post.postURL,
+          "description": post.description,
+          "color": 15979324,
+          "thumbnail": {
+            "url": "https://gmedia.playstation.com/is/image/SIEPDC/ps-plus-blue-bag-icon-01-22sep20?$200px--t$"
+          },
+          "image": {
+            "url": post.imgURL
+          }
+        }
+      ]
+    }
+
+    console.log(obj);
+    // console.dir(JSON.stringify(obj), { depth: null });
+
     const previous = lastPost ? lastPost.postID : null
     if (post.postID !== previous) {
       return post
     }
-    
+
+
 
   } catch (err) {
     console.error(err);
@@ -34,7 +58,7 @@ async function scrapeData(lastPost) {
 }
 
 // Invoke the above function
-// scrapeData();
+scrapeData();
 
 exports.scrapeData = scrapeData
 
