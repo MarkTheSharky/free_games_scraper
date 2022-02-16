@@ -1,5 +1,7 @@
 const axios = require("axios");
 const cheerio = require("cheerio");
+const { testDiscordWebhook } = require('../config.json')
+
 
 // URL of the page we want to scrape
 const url = "https://blog.playstation.com/category/ps-plus/";
@@ -47,6 +49,14 @@ async function scrapeData(lastPost) {
 
     const previous = lastPost ? lastPost.postID : null
     if (post.postID !== previous) {
+      axios({
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        data: JSON.stringify(obj),
+        url: testDiscordWebhook,
+      });
       return post
     }
 
@@ -58,7 +68,7 @@ async function scrapeData(lastPost) {
 }
 
 // Invoke the above function
-scrapeData();
+// scrapeData();
 
 exports.scrapeData = scrapeData
 
