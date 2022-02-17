@@ -35,8 +35,7 @@ sequelize.sync()
   
 // Run Playstation Plus Updater
 async function runPsPlusUpdater() {
-  // const lastPost = await freeGameEntry.findOne({ where: {service: 'psplus'}, order: [ [ 'id', 'DESC' ]]})
-  const lastPost = 'post-359865' //temp variable for testing
+  const lastPost = await freeGameEntry.findOne({ where: {service: 'psplus'}, order: [ [ 'id', 'DESC' ]]})
   const result = await psplus.scrapeData(lastPost)
 
   if (result) {
@@ -46,8 +45,7 @@ async function runPsPlusUpdater() {
 
 // Run Playstation Now Updater
 async function runPsNowUpdater() {
-  // const lastPost = await freeGameEntry.findOne({ where: {service: 'psnow'}, order: [ [ 'id', 'DESC' ]]})
-  const lastPost = 'post-359865' //temp variable for testing
+  const lastPost = await freeGameEntry.findOne({ where: {service: 'psnow'}, order: [ [ 'id', 'DESC' ]]})
   const result = await psnow.scrapeData(lastPost)
 
   if (result) {
@@ -57,8 +55,7 @@ async function runPsNowUpdater() {
 
 // Run Xbox Games Pass Updater
 async function runXboxGamesPassUpdater() {
-  // const lastPost = await freeGameEntry.findOne({ where: {service: 'psnow'}, order: [ [ 'id', 'DESC' ]]})
-  const lastURL = 'post-359865' //temp variable for testing
+  const lastURL = await freeGameEntry.findOne({ where: {service: 'xboxgamespass'}, order: [ [ 'postURL', 'DESC' ]]})
   const result = await xbox.scrapeData(lastURL)
 
   if (result) {
