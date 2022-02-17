@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize')
 const psplus = require('./scrapers/psplus_scraper')
 const psnow = require('./scrapers/psnow_scraper')
+const xbox = require('./scrapers/xbox_games_pass_scraper')
 
 // Set up Sequelize
 const sequelize = new Sequelize({
@@ -54,9 +55,19 @@ async function runPsNowUpdater() {
   }
 }
 
+// Run Xbox Games Pass Updater
+async function runXboxGamesPassUpdater() {
+  // const lastPost = await freeGameEntry.findOne({ where: {service: 'psnow'}, order: [ [ 'id', 'DESC' ]]})
+  const lastURL = 'post-359865' //temp variable for testing
+  const result = await xbox.scrapeData(lastURL)
+
+  if (result) {
+    freeGameEntry.create(result)
+  }
+}
 
 
 
-
-// runPsPlusUpdater()
-// runPsNowUpdater()
+runPsPlusUpdater()
+runPsNowUpdater()
+runXboxGamesPassUpdater()
