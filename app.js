@@ -63,8 +63,6 @@ async function runXboxGamesPassUpdater() {
   }
 }
 
-
-
 runPsPlusUpdater()
 runPsNowUpdater()
 runXboxGamesPassUpdater()

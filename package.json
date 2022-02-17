@@ -2,7 +2,7 @@
   "name": "free_games_web_scraper",
   "version": "1.0.0",
   "description": "",
-  "main": "psplus_scraper.js",
+  "main": "app.js",
   "scripts": {
     "start": "nodemon app.js",
     "psplus": "nodemon scrapers/psplus_scraper.js",
@@ -16,10 +16,6 @@
     "axios": "^0.25.0",
     "cheerio": "^1.0.0-rc.10",
     "cors": "^2.8.5",
-    "discord.js": "^13.6.0",
-    "express": "^4.17.2",
-    "fs": "^0.0.1-security",
-    "pretty": "^2.0.0",
     "sequelize": "^6.16.1",
     "sqlite3": "^5.0.2"
   }
