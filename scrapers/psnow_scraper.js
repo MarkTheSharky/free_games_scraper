@@ -48,7 +48,6 @@ async function scrapeData(lastPost) {
     function validatePSNowPost() {
       const title = post.title.slice(0, 25).toLowerCase()
       return title === 'playstation now games for'
-      
     }
 
     const previous = lastPost ? lastPost.postID : null
