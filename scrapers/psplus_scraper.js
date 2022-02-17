@@ -18,6 +18,7 @@ async function scrapeData(lastPost) {
     const articles = $("article");
 
     const post = { service: "psplus", postID: "", imgURL: "", postURL: "", title: "", description: "" };
+    
     post.postID = $(articles).attr('id')
     post.imgURL = $(articles).find('a').find('div').find('img').attr('data-src');
     post.postURL = $(articles).children().attr('href');
@@ -44,11 +45,13 @@ async function scrapeData(lastPost) {
       ]
     }
 
-    console.log(obj);
-    // console.dir(JSON.stringify(obj), { depth: null });
+    function validatePSPlusPost() {
+      const title = post.title.slice(0, 26).toLowerCase()
+      return title === 'playstation plus games for'
+    }
 
     const previous = lastPost ? lastPost.postID : null
-    if (post.postID !== previous) {
+    if (post.postID !== previous && validatePSPlusPost()) {
       axios({
         method: 'POST',
         headers: {
