@@ -3,3 +3,4 @@ scrapers/ps_amichel.js
 .vscode
 database.sqlite
 config.json
+sequelizeSetup.js

@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
 const psplus = require('./scrapers/psplus_scraper')
+const psnow = require('./scrapers/psnow_scraper')
 
 // Set up Sequelize
 const sequelize = new Sequelize({
@@ -42,4 +43,20 @@ async function runPsPlusUpdater() {
   }
 }
 
-runPsPlusUpdater()
+// Run Playstation Now Updater
+async function runPsNowUpdater() {
+  // const lastPost = await freeGameEntry.findOne({ where: {service: 'psnow'}, order: [ [ 'id', 'DESC' ]]})
+  const lastPost = 'post-359865' //temp variable for testing
+  const result = await psnow.scrapeData(lastPost)
+
+  if (result) {
+    freeGameEntry.create(result)
+  }
+}
+
+
+
+
+
+// runPsPlusUpdater()
+// runPsNowUpdater()
