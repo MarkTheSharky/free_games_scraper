@@ -8,7 +8,7 @@
     "psplus": "nodemon scrapers/psplus_scraper.js",
     "psnow": "nodemon scrapers/psnow_scraper.js",
     "xbox": "nodemon scrapers/xbox_games_pass_scraper.js",
-    "amazon": "nodemon scrapers/amazon_prime_gaming_scraper.js"
+    "prime": "nodemon scrapers/amazon_prime_gaming_scraper.js"
   },
   "author": "",
   "license": "ISC",
