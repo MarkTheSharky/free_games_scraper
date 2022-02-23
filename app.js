@@ -1,5 +1,7 @@
 const Sequelize = require('sequelize')
 const cron = require('node-cron')
+const keepAlive = require("./server/server")
+
 const psplus = require('./scrapers/psplus_scraper')
 const psnow = require('./scrapers/psnow_scraper')
 const xbox = require('./scrapers/xbox_games_pass_scraper')
@@ -68,8 +70,16 @@ async function runXboxGamesPassUpdater() {
 // runPsNowUpdater()
 // runXboxGamesPassUpdater()
 
-cron.schedule('5 * */1 * * *', () => {
+cron.schedule('5 * * * *', () => {
+  console.log(new Date)
   runPsPlusUpdater()
-  runPsNowUpdater()
   runXboxGamesPassUpdater()
+  runPsNowUpdater()
 })
+
+cron.schedule('35 * * * *', () => {
+  console.log(new Date)
+  runPsPlusUpdater()
+})
+
+keepAlive()

@@ -1,6 +1,6 @@
 const axios = require("axios");
 const cheerio = require("cheerio");
-const { discordWebhook } = require('../config.json')
+const discordWebhook = process.env['discordWebhook']
 
 
 // URL of the page we want to scrape
