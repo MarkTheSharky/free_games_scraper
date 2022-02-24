@@ -1,6 +1,6 @@
 const axios = require("axios");
 const cheerio = require("cheerio");
-const { discordWebhook } = require('../config.json')
+const { discordWebhookTEST } = require('../config.json')
 
 
 // URL of the page we want to scrape
@@ -58,7 +58,7 @@ async function scrapeData(lastURL) {
             'Content-Type': 'application/json',
         },
         data: JSON.stringify(obj),
-        url: discordWebhook,
+        url: discordWebhookTEST,
       });
       return post
     }
