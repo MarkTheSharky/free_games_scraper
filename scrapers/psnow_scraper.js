@@ -58,7 +58,7 @@ async function scrapeData(lastPost) {
             'Content-Type': 'application/json',
         },
         data: JSON.stringify(obj),
-        url: discordWebhook,
+        url: discordWebhookTEST,
       });
       return post
     }
