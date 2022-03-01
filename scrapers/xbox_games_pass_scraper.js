@@ -10,40 +10,81 @@ const url = 'https://news.xbox.com/en-us/'
 // Async function which scrapes the data
 async function scrapeData(lastURL) {
   try {
-    // Fetch HTML of the page we want to scrape
-    const { data } = await axios.get(url);
-    // Load HTML we fetched in the previous line
-    const $ = cheerio.load(data);
-    // Select all the article tags
-    const articles = $('div[class="speedbump__post speedbump--solid"]');
 
-    const post = { service: "xboxgamespass", postID: "NA", imgURL: "", postURL: "", title: "", description: "" };
+    // Using 'speedbump' part of feed
+
+    // // Fetch HTML of the page we want to scrape
+    // const { data } = await axios.get(url);
+    // // Load HTML we fetched in the previous line
+    // const $ = cheerio.load(data);
+    // // Select all the article tags
+    // const articles = $('div[class="speedbump__post speedbump--solid"]');
+
+    // const post = { service: "xboxgamespass", postID: "NA", imgURL: "", postURL: "", title: "", description: "" };
 
     
-    post.imgURL = $(articles).find('div[class="speedbump__image"] > a > img').attr('src');
-    post.postURL = $(articles).find('div[class="speedbump__image"] > a').attr('href');
-    const titleString = $(articles).find('div[class="speedbump__image"] > a').attr('aria-label');
-    const colonIndex = titleString.indexOf(':')
-    post.title = titleString.slice(0, colonIndex).replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
-    post.description = titleString.slice(colonIndex + 2)
+    // post.imgURL = $(articles).find('div[class="speedbump__image"] > a > img').attr('src');
+    // post.postURL = $(articles).find('div[class="speedbump__image"] > a').attr('href');
+    // const titleString = $(articles).find('div[class="speedbump__image"] > a').attr('aria-label');
+    // const colonIndex = titleString.indexOf(':')
+    // post.title = titleString.slice(0, colonIndex).replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
+    // post.description = titleString.slice(colonIndex + 2)
 
-    const obj = {
-      "username": "Xbox Game Pass",
-      "embeds": [
-        {
-          "title": post.title,
-          "url": post.postURL,
-          "description": post.description,
-          "color": 1080080,
-          "thumbnail": {
-            "url": "https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RW4ESm?ver=c63e"
-          },
-          "image": {
-            "url": post.imgURL
+    // const obj = {
+    //   "username": "Xbox Game Pass",
+    //   "embeds": [
+    //     {
+    //       "title": post.title,
+    //       "url": post.postURL,
+    //       "description": post.description,
+    //       "color": 1080080,
+    //       "thumbnail": {
+    //         "url": "https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RW4ESm?ver=c63e"
+    //       },
+    //       "image": {
+    //         "url": post.imgURL
+    //       }
+    //     }
+    //   ]
+    // }
+
+
+    // Using main feed
+
+      // Fetch HTML of the page we want to scrape
+      const { data } = await axios.get(url);
+      // Load HTML we fetched in the previous line
+      const $ = cheerio.load(data);
+      // Select all the article tags
+      const articles = $('div[class="media feed"]');
+  
+      const post = { service: "xboxgamespass", postID: "NA", imgURL: "", postURL: "", title: "", description: "" };
+  
+      
+      post.imgURL = $(articles).find('div[class="media-image feed__image"] > a > img').attr('src');
+      post.postURL = $(articles).find('div[class="media-image feed__image"] > a').attr('href');
+      const titleString = $(articles).find('div[class="media-image feed__image"] > a').attr('aria-label');
+      const colonIndex = titleString.indexOf(':')
+      post.title = titleString.slice(0, colonIndex).replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
+      post.description = titleString.slice(colonIndex + 2)
+  
+      const obj = {
+        "username": "Xbox Game Pass",
+        "embeds": [
+          {
+            "title": post.title,
+            "url": post.postURL,
+            "description": post.description,
+            "color": 1080080,
+            "thumbnail": {
+              "url": "https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RW4ESm?ver=c63e"
+            },
+            "image": {
+              "url": post.imgURL
+            }
           }
-        }
-      ]
-    }
+        ]
+      }
 
     function validateXboxGamesPassPost() {
       const title = post.title.slice(0, 29).toLowerCase()
@@ -67,5 +108,7 @@ async function scrapeData(lastURL) {
     console.error(err);
   }
 }
+
+scrapeData()
 
 exports.scrapeData = scrapeData
