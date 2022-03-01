@@ -66,13 +66,13 @@ async function runXboxGamesPassUpdater() {
   }
 }
 
-// runPsPlusUpdater()
-// runPsNowUpdater()
-// runXboxGamesPassUpdater()
+runPsPlusUpdater()
+runPsNowUpdater()
+runXboxGamesPassUpdater()
 
 cron.schedule('5 * * * *', () => {
   console.log(new Date)
-  runPsPlusUpdater()
+  // runPsPlusUpdater()
   runXboxGamesPassUpdater()
   runPsNowUpdater()
 })
@@ -80,6 +80,7 @@ cron.schedule('5 * * * *', () => {
 cron.schedule('35 * * * *', () => {
   console.log(new Date)
   runPsPlusUpdater()
+  runPsNowUpdater()
 })
 
 keepAlive()
