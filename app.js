@@ -72,15 +72,16 @@ runXboxGamesPassUpdater()
 
 cron.schedule('5 * * * *', () => {
   console.log(new Date)
-  // runPsPlusUpdater()
-  runXboxGamesPassUpdater()
+  runPsPlusUpdater()
   runPsNowUpdater()
+  runXboxGamesPassUpdater()
 })
 
 cron.schedule('35 * * * *', () => {
   console.log(new Date)
   runPsPlusUpdater()
   runPsNowUpdater()
+  runXboxGamesPassUpdater()
 })
 
 keepAlive()
